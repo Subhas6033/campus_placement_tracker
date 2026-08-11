@@ -12,11 +12,13 @@ const companySchema = new mongoose.Schema(
     companyLogo: {
       type: String,
       default: null,
+      required: true,
     },
 
     companyWebsite: {
       type: String,
       trim: true,
+      required: true,
     },
 
     industry: {
@@ -32,6 +34,7 @@ const companySchema = new mongoose.Schema(
     description: {
       type: String,
       maxlength: 3000,
+      required: true,
     },
 
     foundedYear: Number,
