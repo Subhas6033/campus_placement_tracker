@@ -4,17 +4,20 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.jsx";
-import {Loader} from "./Components/index.js"
+import { Loader } from "./Components/index.js";
+import ErrorBoundary from "./Error/Erroboundary.jsx";
+import ErrorPage from "./Error/ErrorPage.jsx";
 
 // Pages
 const Home = lazy(() => import("./Pages/Services/Home/Home.jsx"));
 const About = lazy(() => import("./Pages/Services/About/About.jsx"));
-const Contact = lazy(() => import("./Pages/Services/Contact/Contact.jsx"))
+const Contact = lazy(() => import("./Pages/Services/Contact/Contact.jsx"));
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -25,17 +28,19 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path : "contact",
-        element : <Contact />
-      }
+        path: "contact",
+        element: <Contact />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Suspense fallback={<Loader />}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </ErrorBoundary>
   </StrictMode>,
 );
