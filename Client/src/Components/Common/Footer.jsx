@@ -3,100 +3,32 @@ import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 
 const quickLinks = [
-  {
-    name: "dashboard",
-    slug: "/dashboard",
-    category: "platform",
-  },
-  {
-    name: "job opportunities",
-    slug: "/opportunities",
-    category: "platform",
-  },
-  {
-    name: "applications",
-    slug: "/applications",
-    category: "platform",
-  },
-  {
-    name: "interviews",
-    slug: "/interviews",
-    category: "platform",
-  },
-  {
-    name: "companies",
-    slug: "/companies",
-    category: "resources",
-  },
-  {
-    name: "students",
-    slug: "/students",
-    category: "resources",
-  },
-  {
-    name: "placement drives",
-    slug: "/drives",
-    category: "resources",
-  },
-  {
-    name: "reports & analysis",
-    slug: "/reports",
-    category: "resources",
-  },
-  {
-    name: "help center",
-    slug: "/help",
-    category: "support",
-  },
-  {
-    name: "contact us",
-    slug: "/contact",
-    category: "support",
-  },
-  {
-    name: "privacy policy",
-    slug: "/privacy",
-    category: "support",
-  },
-  {
-    name: "terms & conditions",
-    slug: "/terms",
-    category: "support",
-  },
+  { name: "Dashboard", slug: "/dashboard", category: "platform" },
+  { name: "Job opportunities", slug: "/opportunities", category: "platform" },
+  { name: "Applications", slug: "/applications", category: "platform" },
+  { name: "Interviews", slug: "/interviews", category: "platform" },
+  { name: "Companies", slug: "/companies", category: "resources" },
+  { name: "Students", slug: "/students", category: "resources" },
+  { name: "Placement drives", slug: "/drives", category: "resources" },
+  { name: "Reports & analysis", slug: "/reports", category: "resources" },
+  { name: "Help center", slug: "/help", category: "support" },
+  { name: "Contact us", slug: "/contact", category: "support" },
+  { name: "Privacy policy", slug: "/privacy", category: "support" },
+  { name: "Terms & conditions", slug: "/terms", category: "support" },
 ];
 
 const footerSections = [
-  {
-    title: "Platform",
-    category: "platform",
-  },
-  {
-    title: "Resources",
-    category: "resources",
-  },
-  {
-    title: "Support",
-    category: "support",
-  },
+  { title: "Platform", category: "platform" },
+  { title: "Resources", category: "resources" },
+  { title: "Support", category: "support" },
 ];
 
-/*
- * Group links once instead of filtering quickLinks
- * separately for every section.
- */
 const groupedLinks = quickLinks.reduce((groups, link) => {
-  if (!groups[link.category]) {
-    groups[link.category] = [];
-  }
-
+  if (!groups[link.category]) groups[link.category] = [];
   groups[link.category].push(link);
-
   return groups;
 }, {});
 
-/*
- * Social links
- */
 const socialLinks = [
   {
     name: "LinkedIn",
@@ -121,164 +53,114 @@ const socialLinks = [
 const Footer = () => {
   const appName = import.meta.env.VITE_APP_NAME || "Applications Site";
 
-  const appInitials = appName
-    .trim()
-    .split(/\s+/)
-    .map((word) => word.charAt(0))
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
-  const formatLinkName = (name) => {
-    return name
+  const formatLinkName = (name) =>
+    name
       .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
       .join(" ");
-  };
 
   return (
-    <footer className="bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-        {/* Main footer content */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="flex items-center gap-2">
-              {/* Logo */}
-              <div
-                className="
-                  flex h-10 w-10 shrink-0
-                  items-center justify-center
-                  rounded-lg
-                  bg-indigo-600
-                  text-sm font-bold
-                  text-white
-                "
-              >
-                {appInitials}
-              </div>
-
-              {/* App name */}
-              <span className="text-xl font-bold text-white">
-                {appName.split(" ")[0]}
-
-                {appName.split(" ").length > 1 && (
-                  <span className="text-indigo-400">
-                    {" "}
-                    {appName.split(" ").slice(1).join(" ")}
-                  </span>
-                )}
+    <footer className="border-t border-ink-line bg-ink text-[#cfd1d6]">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        {/* Top — manifesto */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-ink-soft text-sm font-semibold text-paper">
+                CP
               </span>
+              <div className="flex flex-col leading-none">
+                <span className="font-display text-[16px] font-medium tracking-tight text-paper">
+                  {appName}
+                </span>
+                <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a8d96]">
+                  Built by students, for students
+                </span>
+              </div>
             </div>
 
-            <p className="mt-4 max-w-xs text-sm leading-6 text-slate-400">
-              A centralized platform to manage campus placements, applications,
-              interviews, and student recruitment.
+            <p className="mt-6 max-w-md text-[14px] leading-6 text-[#a8abb3]">
+              A single workspace to track companies, applications, interviews,
+              and offers across your placement season.
+            </p>
+
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="mt-7 flex max-w-md items-center gap-2"
+            >
+              <input
+                type="email"
+                placeholder="you@college.edu"
+                aria-label="Email for placement alerts"
+                className="h-11 flex-1 rounded-md border border-ink-soft bg-ink-soft px-3.5 text-[14px] text-paper placeholder:text-[#6f737b] focus:border-[#2f6f55] focus:outline-none focus:ring-2 focus:ring-[#2f6f55]/20"
+              />
+              <button
+                type="submit"
+                className="h-11 shrink-0 rounded-md bg-paper px-4 text-[13.5px] font-medium text-ink transition-colors hover:bg-white"
+              >
+                Subscribe
+              </button>
+            </form>
+            <p className="mt-2 text-xs text-[#6f737b]">
+              Weekly placement digest. No spam — unsubscribe anytime.
             </p>
           </div>
 
-          {/* Footer Sections */}
-          {footerSections.map((section) => (
-            <div key={section.category}>
-              <h3
-                className="
-                  text-sm
-                  font-semibold
-                  uppercase
-                  tracking-wider
-                  text-white
-                "
-              >
-                {section.title}
-              </h3>
-
-              <ul className="mt-4 space-y-3">
-                {groupedLinks[section.category]?.map((item) => (
-                  <li key={item.slug}>
-                    <Link
-                      to={item.slug}
-                      className="
-                        block
-                        text-sm
-                        text-slate-400
-                        transition-all
-                        duration-200
-                        hover:translate-x-1
-                        hover:text-indigo-400
-                      "
-                    >
-                      {formatLinkName(item.name)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+            {footerSections.map((section) => (
+              <div key={section.category}>
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a8d96]">
+                  {section.title}
+                </h3>
+                <ul className="mt-4 space-y-3">
+                  {groupedLinks[section.category]?.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        to={item.slug}
+                        className="
+                          inline-flex items-center text-[13.5px] text-[#cfd1d6]
+                          transition-colors duration-150 hover:text-paper
+                        "
+                      >
+                        {formatLinkName(item.name)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom Sections */}
-        <div className="mt-12 border-t border-slate-800 pt-8">
-          <div
-            className="
-              flex
-              flex-col
-              items-center
-              justify-between
-              gap-5
-              text-sm
-              md:flex-row
-            "
-          >
-            {/* Copyright */}
-            <p className="text-center text-slate-500 md:text-left">
-              &copy; {new Date().getFullYear()} {appName}. All rights reserved.
-            </p>
+        {/* Bottom bar */}
+        <div className="mt-14 flex flex-col items-start justify-between gap-5 border-t border-ink-soft pt-8 text-[12.5px] text-[#8a8d96] sm:flex-row sm:items-center">
+          <p>
+            &copy; {new Date().getFullYear()} {appName}. All rights reserved.
+          </p>
 
-            {/* Social links */}
-            <div className="flex items-center gap-2">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target={social.external ? "_blank" : undefined}
-                    rel={social.external ? "noopener noreferrer" : undefined}
-                    aria-label={social.name}
-                    title={social.name}
-                    className="
-                      group
-                      flex h-10 w-10
-                      items-center justify-center
-                      rounded-lg
-                      border border-slate-800
-                      text-slate-400
-                      transition-all
-                      duration-200
-                      hover:border-slate-700
-                      hover:bg-slate-800
-                      hover:text-indigo-400
-                      focus:outline-none
-                      focus-visible:ring-2
-                      focus-visible:ring-indigo-500
-                      focus-visible:ring-offset-2
-                      focus-visible:ring-offset-slate-900
-                      active:scale-95
-                    "
-                  >
-                    <Icon
-                      className="
-                        h-5 w-5
-                        transition-transform
-                        duration-200
-                        group-hover:scale-110
-                      "
-                      aria-hidden="true"
-                    />
-                  </a>
-                );
-              })}
-            </div>
+          <div className="flex items-center gap-2">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target={social.external ? "_blank" : undefined}
+                  rel={social.external ? "noopener noreferrer" : undefined}
+                  aria-label={social.name}
+                  className="
+                    inline-flex h-9 w-9 items-center justify-center
+                    rounded-md border border-ink-soft
+                    text-[#8a8d96]
+                    transition-all duration-150
+                    hover:border-[#2a313d] hover:bg-ink-soft hover:text-paper
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f6f55]
+                  "
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

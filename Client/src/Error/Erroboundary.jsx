@@ -1,10 +1,10 @@
-import { OctagonAlert } from "lucide-react";
+import { OctagonAlert, RotateCw, Home } from "lucide-react";
 import React from "react";
+import Button from "../Components/Common/Button";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       hasError: false,
       error: null,
@@ -21,8 +21,6 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     console.error("Error Boundary:", error);
     console.error("Error Info:", errorInfo);
-
-    // Send error to backend / monitoring service
     this.logError(error, errorInfo);
   }
 
@@ -30,9 +28,7 @@ class ErrorBoundary extends React.Component {
     try {
       await fetch("/api/errors", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: error?.message,
           stack: error?.stack,
@@ -57,46 +53,38 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
-          <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-lg">
-            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
-              <span className="text-3xl">
-                <OctagonAlert />
-              </span>
-            </div>
+        <div className="flex min-h-screen items-center justify-center bg-paper px-6">
+          <div className="w-full max-w-md rounded-xl border border-ink-line bg-white p-8 text-center shadow-[0_12px_32px_-16px_rgba(14,17,22,0.15)]">
+            <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md border border-[#b14a3c]/30 bg-[#b14a3c]/10 text-[#b14a3c]">
+              <OctagonAlert className="h-5 w-5" strokeWidth={1.6} />
+            </span>
 
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="mt-5 font-display text-[22px] font-medium tracking-tight text-ink">
               Something went wrong
             </h1>
 
-            <p className="mt-3 text-sm leading-6 text-slate-500">
-              We encountered an unexpected error while loading this page. Please
-              try again.
+            <p className="mt-2 text-[14px] leading-[1.6] text-ink-mute">
+              We hit an unexpected error rendering this page. Reloading should
+              fix it — if not, head back home.
             </p>
 
-            <div className="mt-6 flex justify-center gap-3">
-              <button
-                onClick={this.handleReload}
-                className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
-              >
-                Try Again
-              </button>
-
-              <button
-                onClick={this.handleGoHome}
-                className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
-              >
-                Go Home
-              </button>
+            <div className="mt-6 flex justify-center gap-2">
+              <Button variant="secondary" size="md" onClick={this.handleGoHome}>
+                <Home className="h-4 w-4" />
+                Home
+              </Button>
+              <Button variant="primary" size="md" onClick={this.handleReload}>
+                <RotateCw className="h-4 w-4" />
+                Try again
+              </Button>
             </div>
 
             {import.meta.env.DEV && this.state.error && (
               <details className="mt-6 text-left">
-                <summary className="cursor-pointer text-sm font-medium text-slate-600">
-                  Developer Error
+                <summary className="cursor-pointer font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#8a8d96]">
+                  Developer error
                 </summary>
-
-                <pre className="mt-3 overflow-auto rounded-lg bg-slate-900 p-4 text-xs text-red-300">
+                <pre className="mt-3 overflow-auto rounded-md border border-ink-soft bg-ink p-3 font-mono text-[11px] leading-[1.5] text-paper">
                   {this.state.error.stack}
                 </pre>
               </details>

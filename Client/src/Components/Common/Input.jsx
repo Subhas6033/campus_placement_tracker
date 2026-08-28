@@ -1,29 +1,28 @@
 import React from "react";
 
 const baseFieldStyles = `
-  w-full rounded-xl border bg-white px-3.5 py-2.5
-  text-sm text-slate-900
+  w-full rounded-md border bg-white px-3.5 py-2.5
+  text-[14px] text-ink
   outline-none transition-all duration-150
-  placeholder:text-slate-400
-  disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400
-  focus:ring-4
+  placeholder:text-[#8a8d96]
+  disabled:cursor-not-allowed disabled:bg-paper disabled:text-[#8a8d96]
 `;
 
 const getFieldStyles = (error) =>
   `${baseFieldStyles} ${
     error
-      ? "border-red-300 focus:border-red-500 focus:ring-red-500/10"
-      : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-500/10"
+      ? "border-[#b14a3c] focus:border-[#b14a3c] focus:ring-2 focus:ring-[#b14a3c]/10"
+      : "border-ink-line focus:border-[#0e1116] focus:ring-2 focus:ring-[#0e1116]/5"
   }`;
 
 const FieldLabel = ({ htmlFor, label, required }) => (
   <label
     htmlFor={htmlFor}
-    className="mb-1.5 block text-sm font-medium text-slate-700"
+    className="mb-1.5 block text-[12.5px] font-medium tracking-wide text-ink"
   >
     {label}
     {required && (
-      <span className="ml-1 text-red-500" aria-hidden="true">
+      <span className="ml-1 text-danger" aria-hidden="true">
         *
       </span>
     )}
@@ -32,9 +31,8 @@ const FieldLabel = ({ htmlFor, label, required }) => (
 
 const FieldError = ({ id, error }) => {
   if (!error) return null;
-
   return (
-    <p id={id} className="mt-1.5 text-xs font-medium text-red-600">
+    <p id={id} className="mt-1.5 text-xs font-medium text-danger">
       {error}
     </p>
   );
@@ -65,7 +63,6 @@ export const Input = ({
   return (
     <div className={`w-full ${className}`}>
       {label && <FieldLabel htmlFor={id} label={label} required={required} />}
-
       <input
         id={id}
         name={name}
@@ -84,12 +81,11 @@ export const Input = ({
         className={getFieldStyles(error)}
         {...props}
       />
-
       {error ? (
         <FieldError id={errorId} error={error} />
       ) : (
         hint && (
-          <p id={hintId} className="mt-1.5 text-xs text-slate-500">
+          <p id={hintId} className="mt-1.5 text-xs text-ink-mute">
             {hint}
           </p>
         )
@@ -121,7 +117,6 @@ export const Select = ({
   return (
     <div className={`w-full ${className}`}>
       {label && <FieldLabel htmlFor={id} label={label} required={required} />}
-
       <div className="relative">
         <select
           id={id}
@@ -140,7 +135,6 @@ export const Select = ({
           <option value="" disabled>
             {placeholder}
           </option>
-
           {options.map((option) => (
             <option
               key={option.value}
@@ -151,13 +145,11 @@ export const Select = ({
             </option>
           ))}
         </select>
-
-        {/* Chevron */}
         <svg
           viewBox="0 0 20 20"
           fill="none"
           aria-hidden="true"
-          className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+          className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8a8d96]"
         >
           <path
             d="M5.5 7.5L10 12L14.5 7.5"
@@ -168,12 +160,11 @@ export const Select = ({
           />
         </svg>
       </div>
-
       {error ? (
         <FieldError id={errorId} error={error} />
       ) : (
         hint && (
-          <p id={hintId} className="mt-1.5 text-xs text-slate-500">
+          <p id={hintId} className="mt-1.5 text-xs text-ink-mute">
             {hint}
           </p>
         )
