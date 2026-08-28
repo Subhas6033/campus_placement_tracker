@@ -92,22 +92,23 @@ userSchema.index({ email: 1, role: 1 });
 
 // Password salting rounds
 const SALT_ROUNDS = 12;
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   try {
-    if (!this.isModified("password")) return next();
+    if (!this.isModified("password")) return;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
   } catch (error) {
-    next(error);
+    console.log("Err while hashing the password", error);
   }
 });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
   try {
+    console.log(`Candidate Password : ${candidatePassword}`);
+    console.log(`Actual Password : ${this.password}`);
     return await bcrypt.compare(candidatePassword, this.password);
   } catch (error) {
-    console.log("Failed to compare the password");
+    console.log("Failed to compare the password", error);
   }
 };
 

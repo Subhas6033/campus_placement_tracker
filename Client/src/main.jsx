@@ -4,10 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.jsx";
+import {Loader} from "./Components/index.js"
 
 // Pages
 const Home = lazy(() => import("./Pages/Services/Home/Home.jsx"));
 const About = lazy(() => import("./Pages/Services/About/About.jsx"));
+const Contact = lazy(() => import("./Pages/Services/Contact/Contact.jsx"))
 
 const router = createBrowserRouter([
   {
@@ -22,13 +24,17 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       },
+      {
+        path : "contact",
+        element : <Contact />
+      }
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <RouterProvider router={router} />
     </Suspense>
   </StrictMode>,
