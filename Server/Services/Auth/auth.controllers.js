@@ -106,4 +106,9 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new APIRES(200, null, "Logged out successfully."));
 });
 
-export { registerUser, loginUser, logoutUser };
+export {
+  generateAccessTokenAndRefreshToken,
+  registerUser,
+  loginUser,
+  logoutUser,
+};
