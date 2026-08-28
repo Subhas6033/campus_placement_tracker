@@ -1,8 +1,15 @@
-import { ArrowLeft, Home, RefreshCw, TriangleAlert } from "lucide-react";
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import { ArrowLeft, Home, RefreshCw, TriangleAlert, X } from "lucide-react";
+import {
+  isRouteErrorResponse,
+  useNavigate,
+  useRouteError,
+} from "react-router-dom";
+
+import { Button, Modal } from "../Components";
 
 const ErrorPage = () => {
   const error = useRouteError();
+  const navigate = useNavigate();
 
   const getErrorMessage = () => {
     if (isRouteErrorResponse(error)) {
@@ -12,7 +19,7 @@ const ErrorPage = () => {
             code: "404",
             title: "Page not found",
             message:
-              "The page you are looking for doesn't exist or may have been moved.",
+              "The page you're looking for doesn't exist or may have been moved.",
           };
 
         case 401:
@@ -54,87 +61,169 @@ const ErrorPage = () => {
 
   const { code, title, message } = getErrorMessage();
 
-  const handleRetry = () => {
-    window.location.reload();
-  };
+  const appName = import.meta.env.VITE_APP_NAME || "Applications Site";
+
+  const appInitials = appName
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   const handleGoBack = () => {
-    window.history.back();
-  };
-
-  const handleHome = () => {
-    window.location.href = "/";
+    navigate(-1);
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-5">
-      <div className="w-full max-w-md text-center">
-        {/* Logo */}
-        <div className="mb-10 flex justify-center">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white">
-              {import.meta.env.VITE_APP_NAME.split(" ")
-                .map((val) => val.charAt(0))
-                .join("")}
-            </div>
+    <Modal
+      open={true}
+      onClose={handleGoBack}
+      size="sm"
+      closeOnBackdrop={false}
+      closeOnEscape={true}
+      ariaLabel={`${title} - Error ${code}`}
+    >
+      <div className="relative px-1 py-1">
+        {/* Close */}
+        <button
+          type="button"
+          onClick={handleGoBack}
+          aria-label="Close dialog"
+          title="Close"
+          className="
+    group
+    absolute right-4 top-4
+    inline-flex h-10 w-10
+    items-center justify-center
+    rounded-xl
+    border border-slate-200
+    bg-white
+    text-slate-400
+    shadow-sm
 
-            <span className="text-lg font-semibold text-gray-900">
-              {import.meta.env.VITE_APP_NAME}
-            </span>
+    transition-all duration-200 ease-out
+
+    hover:border-slate-300
+    hover:bg-slate-50
+    hover:text-slate-700
+    hover:shadow-md
+    hover:cursor-pointer
+
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-indigo-500/50
+    focus-visible:ring-offset-2
+
+    active:scale-95
+    active:bg-slate-100
+
+    disabled:pointer-events-none
+    disabled:opacity-50
+  "
+        >
+          <X
+            className="
+      h-5 w-5
+      transition-transform duration-200
+      group-hover:scale-105
+    "
+            strokeWidth={1.8}
+            aria-hidden="true"
+          />
+        </button>
+
+        {/* Application */}
+        <div className="flex items-center gap-2">
+          <div
+            className="
+              flex h-8 w-8
+              items-center justify-center
+              rounded-lg
+              bg-indigo-600
+              text-xs font-bold
+              text-white
+            "
+          >
+            {appInitials}
           </div>
+
+          <span className="text-sm font-semibold text-slate-800">
+            {appName}
+          </span>
         </div>
 
-        {/* Error */}
-        <div className="flex justify-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-500">
-            <TriangleAlert className="h-8 w-8 text-white" strokeWidth={2} />
+        {/* Error content */}
+        <div className="mt-8 text-center">
+          {/* Icon */}
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-50">
+            <TriangleAlert className="h-7 w-7 text-red-500" strokeWidth={2} />
           </div>
+
+          {/* Error code */}
+          <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-red-500">
+            Error {code}
+          </p>
+
+          {/* Title */}
+          <h1 className="mt-2 text-xl font-semibold text-slate-900">{title}</h1>
+
+          {/* Message */}
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-5 text-slate-500">
+            {message}
+          </p>
         </div>
-
-        <p className="mt-6 text-sm font-medium text-gray-400">Error {code}</p>
-
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900">
-          {title}
-        </h1>
-
-        <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-gray-500">
-          {message}
-        </p>
 
         {/* Actions */}
-        <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <button
-            onClick={handleRetry}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 sm:w-auto"
+        <div className="mx-auto mt-7 grid w-full max-w-sm grid-cols-2 gap-3">
+          <Button
+            onClick={() => window.location.reload()}
+            variant="primary"
+            size="md"
+            className="w-full"
           >
-            <RefreshCw className="h-4 w-4" />
-            Try again
-          </button>
+            <span className="flex justify-center gap-2">
+              <RefreshCw className="h-4 w-4" />
+              <span>Try again</span>
+            </span>
+          </Button>
 
-          <button
-            onClick={handleHome}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 sm:w-auto"
+          <Button
+            onClick={() => navigate("/dashboard")}
+            variant="secondary"
+            size="md"
+            className="w-full"
           >
-            <Home className="h-4 w-4" />
-            Dashboard
-          </button>
+            <span className="flex justify-center gap-2">
+              <Home className="h-4 w-4" />
+              <span>Dashboard</span>
+            </span>
+          </Button>
         </div>
 
         {/* Back */}
-        <button
-          onClick={handleGoBack}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm text-gray-400 transition hover:text-gray-700"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Go back
-        </button>
+        <div className="mt-4 flex justify-center">
+          <Button
+            onClick={handleGoBack}
+            variant="outline"
+            size="sm"
+            className="text-slate-500 hover:text-slate-800"
+          >
+            <span className="flex justify-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Go back
+            </span>
+          </Button>
+        </div>
 
-        {/* Small support text */}
-        <p className="mt-12 text-xs text-gray-400">
-          If this keeps happening, please contact your placement administration.
-        </p>
+        {/* Support */}
+        <div className="mt-6 border-t border-slate-100 pt-4 text-center">
+          <p className="text-xs text-slate-400">
+            If this keeps happening, please contact your placement
+            administration.
+          </p>
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

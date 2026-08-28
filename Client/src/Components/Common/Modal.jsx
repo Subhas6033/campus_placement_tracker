@@ -5,6 +5,7 @@ const Modal = ({
   onClose,
   title,
   description,
+  ariaLabel,
   children,
   footer,
   size = "md",
@@ -68,16 +69,19 @@ const Modal = ({
       <div
         role="dialog"
         aria-modal="true"
+        aria-level={ariaLabel}
         aria-labelledby={title ? "modal-title" : undefined}
         aria-describedby={description ? "modal-description" : undefined}
         onMouseDown={(event) => event.stopPropagation()}
         className={`
-          relative z-10 w-full ${sizes[size]}
-          overflow-hidden rounded-2xl
-          border border-slate-200
-          bg-white shadow-2xl shadow-slate-950/20
-          animate-in fade-in zoom-in-95 duration-200
-        `}
+    relative z-10 w-full ${sizes[size]}
+    overflow-hidden
+    rounded-2xl
+    border border-slate-200
+    bg-white
+    shadow-2xl shadow-slate-950/20
+    animate-in fade-in zoom-in-95 duration-200
+  `}
       >
         {/* Header */}
         {(title || description) && (

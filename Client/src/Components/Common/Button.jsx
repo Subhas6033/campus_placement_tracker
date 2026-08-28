@@ -1,5 +1,3 @@
-import React from "react";
-
 const Button = ({
   children,
   className = "",
@@ -33,11 +31,11 @@ const Button = ({
   };
 
   const sizes = {
-    xs: "h-8 px-3 text-xs rounded-lg",
-    sm: "h-9 px-3.5 text-sm rounded-lg",
-    md: "h-10 px-4 text-sm rounded-xl",
-    lg: "h-11 px-5 text-sm rounded-xl",
-    xl: "h-12 px-6 text-base rounded-xl",
+    xs: "h-8 rounded-lg px-3 text-xs",
+    sm: "h-9 rounded-lg px-3.5 text-sm",
+    md: "h-10 rounded-xl px-4 text-sm",
+    lg: "h-11 rounded-xl px-5 text-sm",
+    xl: "h-12 rounded-xl px-6 text-base",
   };
 
   const isDisabled = disabled || loading;
@@ -50,7 +48,9 @@ const Button = ({
       disabled={isDisabled}
       aria-busy={loading}
       className={`
-        inline-flex items-center justify-center gap-2
+        inline-flex shrink-0
+        items-center justify-center
+        gap-2
         whitespace-nowrap
         font-medium
         outline-none
