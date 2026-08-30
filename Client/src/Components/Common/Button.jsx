@@ -1,5 +1,3 @@
-import React from "react";
-
 const Button = ({
   children,
   className = "",
@@ -13,31 +11,31 @@ const Button = ({
   ...props
 }) => {
   const variants = {
-    primary:
-      "bg-indigo-600 text-white shadow-sm hover:bg-indigo-700 active:bg-indigo-800 focus-visible:ring-indigo-500/30",
+    primary: "!bg-ink !text-paper hover:!bg-ink-soft active:!bg-[#2a313d]",
+
+    accent:
+      "!bg-[#2f6f55] !text-white hover:!bg-[#235740] active:!bg-[#1a4230]",
 
     secondary:
-      "border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 active:bg-slate-100 focus-visible:ring-slate-400/30",
+      "!border !border-ink-line !bg-white !text-ink hover:!bg-paper active:!bg-[#ece9e1]",
 
     outline:
-      "border border-indigo-200 bg-transparent text-indigo-600 hover:bg-indigo-50 active:bg-indigo-100 focus-visible:ring-indigo-500/30",
+      "!border !border-[#0e1116] !bg-transparent !text-ink hover:!bg-ink hover:!text-paper",
 
-    ghost:
-      "bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200 focus-visible:ring-slate-400/30",
+    ghost: "!bg-transparent !text-ink-mute hover:!bg-paper hover:!text-ink",
 
     danger:
-      "bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800 focus-visible:ring-red-500/30",
+      "!bg-[#b14a3c] !text-white hover:!bg-[#963e32] active:!bg-[#7e342a]",
 
-    success:
-      "bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 active:bg-emerald-800 focus-visible:ring-emerald-500/30",
+    success: "!bg-[#2f6f55] !text-white hover:!bg-[#235740]",
   };
 
   const sizes = {
-    xs: "h-8 px-3 text-xs rounded-lg",
-    sm: "h-9 px-3.5 text-sm rounded-lg",
-    md: "h-10 px-4 text-sm rounded-xl",
-    lg: "h-11 px-5 text-sm rounded-xl",
-    xl: "h-12 px-6 text-base rounded-xl",
+    xs: "h-8 px-3 text-xs",
+    sm: "h-9 px-3.5 text-[13px]",
+    md: "h-10 px-4 text-sm",
+    lg: "h-11 px-5 text-[14px]",
+    xl: "h-12 px-5 text-[14px]",
   };
 
   const isDisabled = disabled || loading;
@@ -50,16 +48,12 @@ const Button = ({
       disabled={isDisabled}
       aria-busy={loading}
       className={`
-        inline-flex items-center justify-center gap-2
-        whitespace-nowrap
-        font-medium
-        outline-none
-        transition-all duration-150
-        focus-visible:ring-4
-        disabled:pointer-events-none
-        disabled:cursor-not-allowed
-        disabled:opacity-50
-        active:scale-[0.98]
+        inline-flex shrink-0 items-center justify-center gap-2
+        whitespace-nowrap rounded-md font-medium
+        outline-none transition-all duration-150
+        focus-visible:ring-2! focus-visible:ring-[#2f6f55]! focus-visible:ring-offset-2! focus-visible:ring-offset-paper!
+        disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50
+        active:scale-[0.985]
         hover:cursor-pointer
         ${variants[variant] ?? variants.primary}
         ${sizes[size] ?? sizes.md}
@@ -82,7 +76,6 @@ const Button = ({
             stroke="currentColor"
             strokeWidth="3"
           />
-
           <path
             d="M21 12a9 9 0 0 0-9-9"
             stroke="currentColor"

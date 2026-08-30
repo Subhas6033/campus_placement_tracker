@@ -1,8 +1,15 @@
-import { ArrowLeft, Home, RefreshCw, TriangleAlert } from "lucide-react";
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import { ArrowLeft, Home, RefreshCw, TriangleAlert, X } from "lucide-react";
+import {
+  isRouteErrorResponse,
+  useNavigate,
+  useRouteError,
+} from "react-router-dom";
+
+import { Button, Modal } from "../Components";
 
 const ErrorPage = () => {
   const error = useRouteError();
+  const navigate = useNavigate();
 
   const getErrorMessage = () => {
     if (isRouteErrorResponse(error)) {
@@ -12,30 +19,26 @@ const ErrorPage = () => {
             code: "404",
             title: "Page not found",
             message:
-              "The page you are looking for doesn't exist or may have been moved.",
+              "The page you're looking for doesn't exist or may have been moved.",
           };
-
         case 401:
           return {
             code: "401",
             title: "Sign in required",
             message: "Please sign in to continue accessing this page.",
           };
-
         case 403:
           return {
             code: "403",
             title: "Access denied",
             message: "You don't have permission to access this page.",
           };
-
         case 500:
           return {
             code: "500",
             title: "Something went wrong",
             message: "We couldn't load this page right now. Please try again.",
           };
-
         default:
           return {
             code: error.status,
@@ -44,7 +47,6 @@ const ErrorPage = () => {
           };
       }
     }
-
     return {
       code: "500",
       title: "Something went wrong",
@@ -53,88 +55,108 @@ const ErrorPage = () => {
   };
 
   const { code, title, message } = getErrorMessage();
+  const appName = import.meta.env.VITE_APP_NAME || "Applications Site";
 
-  const handleRetry = () => {
-    window.location.reload();
-  };
-
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
-  const handleHome = () => {
-    window.location.href = "/";
-  };
+  const handleGoBack = () => navigate(-1);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-5">
-      <div className="w-full max-w-md text-center">
-        {/* Logo */}
-        <div className="mb-10 flex justify-center">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white">
-              {import.meta.env.VITE_APP_NAME.split(" ")
-                .map((val) => val.charAt(0))
-                .join("")}
-            </div>
-
-            <span className="text-lg font-semibold text-gray-900">
-              {import.meta.env.VITE_APP_NAME}
-            </span>
-          </div>
-        </div>
-
-        {/* Error */}
-        <div className="flex justify-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-500">
-            <TriangleAlert className="h-8 w-8 text-white" strokeWidth={2} />
-          </div>
-        </div>
-
-        <p className="mt-6 text-sm font-medium text-gray-400">Error {code}</p>
-
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900">
-          {title}
-        </h1>
-
-        <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-gray-500">
-          {message}
-        </p>
-
-        {/* Actions */}
-        <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <button
-            onClick={handleRetry}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 sm:w-auto"
-          >
-            <RefreshCw className="h-4 w-4" />
-            Try again
-          </button>
-
-          <button
-            onClick={handleHome}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 sm:w-auto"
-          >
-            <Home className="h-4 w-4" />
-            Dashboard
-          </button>
-        </div>
-
-        {/* Back */}
+    <Modal
+      open={true}
+      onClose={handleGoBack}
+      size="sm"
+      closeOnBackdrop={false}
+      closeOnEscape={true}
+      ariaLabel={`${title} - Error ${code}`}
+    >
+      <div className="relative">
         <button
+          type="button"
           onClick={handleGoBack}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm text-gray-400 transition hover:text-gray-700"
+          aria-label="Close dialog"
+          title="Close"
+          className="
+            absolute right-0 top-0 inline-flex h-8 w-8 items-center justify-center
+            rounded-md border border-ink-line bg-white text-ink-mute
+            transition-colors hover:bg-paper hover:text-ink
+          "
         >
-          <ArrowLeft className="h-4 w-4" />
-          Go back
+          <X className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
         </button>
 
-        {/* Small support text */}
-        <p className="mt-12 text-xs text-gray-400">
-          If this keeps happening, please contact your placement administration.
-        </p>
+        <div className="flex items-center gap-2.5 pr-8">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink text-[11px] font-semibold text-paper">
+            CP
+          </span>
+          <span className="text-[13px] font-semibold tracking-tight text-ink">
+            {appName}
+          </span>
+        </div>
+
+        <div className="mt-7 text-center">
+          <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md bg-danger/10 text-danger">
+            <TriangleAlert className="h-5 w-5" strokeWidth={1.8} />
+          </span>
+
+          <p className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.2em] text-danger">
+            Error {code}
+          </p>
+
+          <h1 className="mt-1.5 font-display text-[20px] font-medium tracking-tight text-ink">
+            {title}
+          </h1>
+
+          <p className="mx-auto mt-2 max-w-sm text-[13.5px] leading-[1.55] text-ink-mute">
+            {message}
+          </p>
+        </div>
+
+        <div className="mt-6 grid w-full grid-cols-2 gap-2">
+          <Button
+            onClick={() => window.location.reload()}
+            variant="secondary"
+            size="md"
+            className="w-full"
+          >
+            <span className="flex justify-center gap-2">
+              <RefreshCw className="h-4 w-4" />
+              Try again
+            </span>
+          </Button>
+
+          <Button
+            onClick={() => navigate("/")}
+            variant="primary"
+            size="md"
+            className="w-full"
+          >
+            <span className="flex justify-center gap-2">
+              <Home className="h-4 w-4" />
+              Dashboard
+            </span>
+          </Button>
+        </div>
+
+        <div className="mt-3 flex justify-center">
+          <Button
+            onClick={handleGoBack}
+            variant="outline"
+            size="sm"
+            className="text-ink-mute"
+          >
+            <span className="flex justify-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Go back
+            </span>
+          </Button>
+        </div>
+
+        <div className="mt-5 border-t border-ink-line pt-4 text-center">
+          <p className="text-[12px] text-[#8a8d96]">
+            If this keeps happening, contact your placement administration.
+          </p>
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
