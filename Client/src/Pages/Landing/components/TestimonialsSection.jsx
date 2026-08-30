@@ -58,7 +58,7 @@ const TestimonialsSection = () => {
 
   return (
     <section className="bg-paper py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           reduce={reduce}
           eyebrow="Loved by students"

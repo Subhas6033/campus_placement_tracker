@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { FiCheckCircle, FiMail, FiArrowRight } from "react-icons/fi";
-import { Input } from "../../../Components/Common/Input";
-import Button from "../../../Components/Common/Button";
-import Modal from "../../../Components/Common/Modal";
+import { Button, Modal } from "../../../Components/index";
 
 const CTASection = () => {
   const reduce = useReducedMotion();
@@ -132,8 +130,10 @@ const CTASection = () => {
                     loading={submitting}
                     className="h-11! sm:w-auto!"
                   >
-                    <FiMail className="h-4 w-4" />
-                    Join
+                    <span className="flex justify-center gap-2">
+                      <FiMail className="h-4 w-4" />
+                      Join
+                    </span>
                   </Button>
                 </div>
                 {error ? (

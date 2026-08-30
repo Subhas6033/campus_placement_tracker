@@ -93,11 +93,11 @@ const ErrorPage = () => {
         </div>
 
         <div className="mt-7 text-center">
-          <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md bg-[#b14a3c]/10 text-[#b14a3c]">
+          <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md bg-danger/10 text-danger">
             <TriangleAlert className="h-5 w-5" strokeWidth={1.8} />
           </span>
 
-          <p className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.2em] text-[#b14a3c]">
+          <p className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.2em] text-danger">
             Error {code}
           </p>
 
@@ -117,8 +117,10 @@ const ErrorPage = () => {
             size="md"
             className="w-full"
           >
-            <RefreshCw className="h-4 w-4" />
-            Try again
+            <span className="flex justify-center gap-2">
+              <RefreshCw className="h-4 w-4" />
+              Try again
+            </span>
           </Button>
 
           <Button
@@ -127,20 +129,24 @@ const ErrorPage = () => {
             size="md"
             className="w-full"
           >
-            <Home className="h-4 w-4" />
-            Dashboard
+            <span className="flex justify-center gap-2">
+              <Home className="h-4 w-4" />
+              Dashboard
+            </span>
           </Button>
         </div>
 
         <div className="mt-3 flex justify-center">
           <Button
             onClick={handleGoBack}
-            variant="ghost"
+            variant="outline"
             size="sm"
             className="text-ink-mute"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Go back
+            <span className="flex justify-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Go back
+            </span>
           </Button>
         </div>
 

@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../Components/Common/Footer";
 import HeroSection from "./components/HeroSection";
 import StatsStrip from "./components/StatsStrip";
 import FeaturesSection from "./components/FeaturesSection";

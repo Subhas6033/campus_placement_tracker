@@ -55,7 +55,7 @@ class ErrorBoundary extends React.Component {
       return (
         <div className="flex min-h-screen items-center justify-center bg-paper px-6">
           <div className="w-full max-w-md rounded-xl border border-ink-line bg-white p-8 text-center shadow-[0_12px_32px_-16px_rgba(14,17,22,0.15)]">
-            <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md border border-[#b14a3c]/30 bg-[#b14a3c]/10 text-[#b14a3c]">
+            <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-md border border-danger/30 bg-danger/10 text-danger">
               <OctagonAlert className="h-5 w-5" strokeWidth={1.6} />
             </span>
 
@@ -84,7 +84,7 @@ class ErrorBoundary extends React.Component {
                 <summary className="cursor-pointer font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#8a8d96]">
                   Developer error
                 </summary>
-                <pre className="mt-3 overflow-auto rounded-md border border-ink-soft bg-ink p-3 font-mono text-[11px] leading-[1.5] text-paper">
+                <pre className="mt-3 overflow-auto rounded-md border border-ink-soft bg-ink p-3 font-mono text-[11px] leading-normal text-paper">
                   {this.state.error.stack}
                 </pre>
               </details>

@@ -35,9 +35,9 @@ const Nav = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b transition-colors duration-200 ${
+      className={`fixed inset-x-0 top-0 z-9999 w-full border-b transition-all duration-200 ${
         scrolled
-          ? "border-ink-line bg-paper-soft/85 backdrop-blur-md"
+          ? "border-ink-line bg-paper-soft/90 shadow-[0_1px_3px_rgba(0,0,0,0.04)] backdrop-blur-xl"
           : "border-transparent bg-paper-soft"
       }`}
     >

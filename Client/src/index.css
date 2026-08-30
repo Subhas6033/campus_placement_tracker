@@ -67,6 +67,10 @@ body,
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  display: block;
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
