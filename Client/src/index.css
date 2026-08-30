@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
 
 @theme {
   /* Surface colors (bone / paper) */
@@ -68,7 +68,7 @@ body,
 }
 
 ::-webkit-scrollbar {
-  display: block;
+  display: none;
 }
 
 body {

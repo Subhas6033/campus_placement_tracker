@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import Modal from "../../../Components/Common/Modal";
-import { Input } from "../../../Components/Common/Input";
-import Button from "../../../Components/Common/Button";
+import { Modal, Input, Button } from "../../../Components/index";
 
 const initials = (name) =>
   name

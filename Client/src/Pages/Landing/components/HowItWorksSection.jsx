@@ -1,32 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { FiUserPlus, FiSend, FiAward } from "react-icons/fi";
-
-const steps = [
-  {
-    icon: FiUserPlus,
-    number: "01",
-    title: "Set up your profile",
-    description:
-      "Add your resume, skills, and target roles. We'll surface the companies that fit you best.",
-    chips: ["Resume", "Skills", "Targets"],
-  },
-  {
-    icon: FiSend,
-    number: "02",
-    title: "Track every application",
-    description:
-      "Apply with one click and watch each opportunity move through your personal pipeline.",
-    chips: ["One-click apply", "Pipeline view", "Reminders"],
-  },
-  {
-    icon: FiAward,
-    number: "03",
-    title: "Ace the interview",
-    description:
-      "Prep with curated questions, attend the interview, and update your status — all in one place.",
-    chips: ["Question bank", "Mock AI", "Notes"],
-  },
-];
+import { steps } from "../../../Data/HowItWorksData";
 
 const container = {
   hidden: { opacity: 0 },
@@ -112,7 +85,7 @@ const HowItWorksSection = () => {
                       className="
                     absolute left-1/2 top-12 hidden h-px
                     w-full -translate-y-1/2
-                    bg-gradient-to-r
+                    bg-linear-to-r
                     from-[#2a313d]
                     via-ink-mute
                     to-transparent
