@@ -25,7 +25,7 @@ const HeroContent = ({ item, onGetStarted, onSignIn }) => {
           "
         >
           <span className="live-dot" />
-          Season 2026 is live
+          {`Season ${new Date().getFullYear()} is live`}
         </span>
       </motion.div>
 
