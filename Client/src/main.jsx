@@ -1,7 +1,6 @@
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import "./index.css";
 import App from "./App.jsx";
 import { Loader } from "./Components/index.js";
@@ -13,6 +12,8 @@ const Landing = lazy(() => import("./Pages/Landing/Landing.jsx"));
 const Home = lazy(() => import("./Pages/Services/Home/Home.jsx"));
 const About = lazy(() => import("./Pages/Services/About/About.jsx"));
 const Contact = lazy(() => import("./Pages/Services/Contact/Contact.jsx"));
+const Signup = lazy(() => import("./Pages/Services/Auth/Signup.jsx"));
+const Login = lazy(() => import("./Pages/Services/Auth/Login.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+      {
+        path: "signin",
+        element: <Login />,
       },
     ],
   },

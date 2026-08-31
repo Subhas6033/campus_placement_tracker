@@ -33,6 +33,9 @@ const Nav = () => {
 
   const closeMobile = () => setOpenMobile(false);
 
+  const appName = import.meta.env.VITE_APP_NAV_NAME;
+  const appTagline = import.meta.env.VITE_APP_TAGLINE;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-9999 w-full border-b transition-all duration-200 ${
@@ -49,15 +52,17 @@ const Nav = () => {
           className="group flex items-center gap-2.5"
           aria-label="Campus Placement Tracker — Home"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-ink text-[13px] font-semibold tracking-tight text-paper">
-            CP
+          <span className="p-5 flex h-9 w-9 items-center justify-center rounded-md bg-ink text-[13px] font-bold tracking-tight text-paper">
+            {import.meta.env.VITE_APP_NAME.split(" ")
+              .map((val) => val.charAt(0))
+              .join("")}
           </span>
           <span className="flex flex-col leading-none">
             <span className="font-display text-[15px] font-medium tracking-tight text-ink">
-              Campus Placement
+              {appName}
             </span>
             <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-              Tracker
+              {appTagline}
             </span>
           </span>
         </Link>

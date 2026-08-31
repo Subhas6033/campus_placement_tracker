@@ -39,7 +39,10 @@ const Loader = () => {
           />
 
           <span className="relative text-sm font-semibold tracking-tight">
-            CP
+            {appName
+              .split(" ")
+              .map((val) => val.charAt(0))
+              .join("")}
           </span>
         </div>
 
