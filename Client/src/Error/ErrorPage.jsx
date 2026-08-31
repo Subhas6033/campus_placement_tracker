@@ -84,8 +84,11 @@ const ErrorPage = () => {
         </button>
 
         <div className="flex items-center gap-2.5 pr-8">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink text-[11px] font-semibold text-paper">
-            CP
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink text-[11px] font-bold text-paper">
+            {appName
+              .split(" ")
+              .map((val) => val.charAt(0))
+              .join("")}
           </span>
           <span className="text-[13px] font-semibold tracking-tight text-ink">
             {appName}

@@ -65,9 +65,12 @@ const Footer = () => {
         {/* Top — manifesto */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-ink-soft text-sm font-semibold text-paper">
-                CP
+            <div className="flex items-center gap-2.5 p-2">
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-ink-soft text-sm font-bold text-paper p-5">
+                {appName
+                  .split(" ")
+                  .map((val) => val.charAt(0))
+                  .join("")}
               </span>
               <div className="flex flex-col leading-none">
                 <span className="font-display text-[16px] font-medium tracking-tight text-paper">
@@ -96,7 +99,8 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="h-11 shrink-0 rounded-md bg-paper px-4 text-[13.5px] font-medium text-ink transition-colors hover:bg-white"
+                className="h-11 shrink-0 rounded-md bg-paper px-4 text-[13.5px] font-medium text-ink transition-colors hover:bg-white hover:cursor-pointer"
+                onClick={() => alert("Thanks for Subscribing...")}
               >
                 Subscribe
               </button>

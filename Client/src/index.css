@@ -257,6 +257,41 @@ body {
     opacity: 0;
   }
 }
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes brand-marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-brand-marquee {
+  animation: brand-marquee 500s linear infinite;
+  will-change: transform;
+}
+
+.animate-brand-marquee-reverse {
+  animation: brand-marquee-reverse 500s linear infinite;
+  will-change: transform;
+}
+
+/* Pause both rows when the marquee is hovered */
+.marquee-container:hover .animate-brand-marquee,
+.marquee-container:hover .animate-brand-marquee-reverse {
+  animation-play-state: paused;
+}
 
 /* Selection */
 ::selection {
