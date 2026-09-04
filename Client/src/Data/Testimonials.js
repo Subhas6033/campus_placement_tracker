@@ -20,4 +20,11 @@ export const testimonials = [
     role: "PM @ Atlassian · BITS Pilani",
     initials: "RM",
   },
+  {
+    quote:
+      "Smart alerts saved me twice — once for a deadline and once for a referral window. Best $0 I've ever spent.",
+    name: "Rohan Mondal",
+    role: "PM @ Atlassian · BITS Pilani",
+    initials: "RM",
+  },
 ];

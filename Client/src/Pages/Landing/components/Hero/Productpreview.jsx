@@ -70,13 +70,13 @@ const ProductPreview = ({ reduce }) => {
         {/* Browser header */}
         <div className="flex items-center justify-between border-b border-ink-line bg-paper-soft px-4 py-3">
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#b88947]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#cfd1d6]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-ink-line-strong" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#82ff15]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ffd94f]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-danger" />
           </div>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a8d96]">
-            tracker.app / pipeline
+          <span className="font-mono text-[10px] text-black bg-slate-200 p-2 rounded-md">
+            https://campusplacement.app/pipeline
           </span>
 
           <ArrowUpRight className="h-3.5 w-3.5 text-[#8a8d96]" />
